@@ -22,13 +22,31 @@
         <div class="game-options">
             <h2>Game Options</h2>
             <div class="options-container">
-                <div class="radio-option">
-                    <input type="radio" id="wallCollision" name="gameMode" value="walls" checked>
-                    <label for="wallCollision">Game with Walls</label>
+                <div class="options-section">
+                    <h3>Game Mode</h3>
+                    <div class="radio-option">
+                        <input type="radio" id="wallPass" name="gameMode" value="pass" checked>
+                        <label for="wallPass">Pass Through Walls</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="wallCollision" name="gameMode" value="walls">
+                        <label for="wallCollision">Game with Walls</label>
+                    </div>
                 </div>
-                <div class="radio-option">
-                    <input type="radio" id="wallPass" name="gameMode" value="pass">
-                    <label for="wallPass">Pass Through Walls</label>
+                <div class="options-section">
+                    <h3>Snake Speed</h3>
+                    <div class="radio-option">
+                        <input type="radio" id="speedSlow" name="gameSpeed" value="slow">
+                        <label for="speedSlow">Slow</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="speedNormal" name="gameSpeed" value="normal" checked>
+                        <label for="speedNormal">Normal</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="speedFast" name="gameSpeed" value="fast">
+                        <label for="speedFast">Fast</label>
+                    </div>
                 </div>
             </div>
         </div>
