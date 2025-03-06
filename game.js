@@ -24,11 +24,24 @@ class Snake {
         this.grew = true;
     }
 
-    checkCollision(width, height) {
+    checkCollision(width, height, wallPass) {
         const head = this.position[0];
-        if (head.x < 0 || head.x >= width || head.y < 0 || head.y >= height) {
-            return true;
+        
+        if (wallPass) {
+            // Wrap around when passing through walls
+            this.position[0] = {
+                x: (head.x + width) % width,
+                y: (head.y + height) % height
+            };
+            return false;
+        } else {
+            // Check wall collision
+            if (head.x < 0 || head.x >= width || head.y < 0 || head.y >= height) {
+                return true;
+            }
         }
+        
+        // Check self collision
         return this.position.slice(1).some(segment => segment.x === head.x && segment.y === head.y);
     }
 }
@@ -44,12 +57,23 @@ class Game {
         this.food = { x: 15, y: 15 };
         this.score = 0;
         this.gameLoop = null;
+        this.wallPass = false;
         this.setupEventListeners();
     }
 
     setupEventListeners() {
         document.getElementById('startButton').addEventListener('click', () => this.start());
         document.addEventListener('keydown', (e) => this.handleInput(e));
+        
+        // Add event listeners for game mode radio buttons
+        document.getElementById('wallPass').addEventListener('change', (e) => {
+            this.wallPass = e.target.checked;
+            this.canvas.classList.remove('walls-mode');
+        });
+        document.getElementById('wallCollision').addEventListener('change', (e) => {
+            this.wallPass = !e.target.checked;
+            this.canvas.classList.add('walls-mode');
+        });
     }
 
     handleInput(e) {
@@ -88,7 +112,7 @@ class Game {
     update() {
         this.snake.move();
 
-        if (this.snake.checkCollision(this.width, this.height)) {
+        if (this.snake.checkCollision(this.width, this.height, this.wallPass)) {
             this.gameOver();
             return;
         }

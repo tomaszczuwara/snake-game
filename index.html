@@ -7,15 +7,30 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="game-container">
-        <div class="game-header">
-            <h1>Snake Game</h1>
-            <div class="score">Score: <span id="score">0</span></div>
+    <div class="game-wrapper">
+        <div class="game-container">
+            <div class="game-header">
+                <h1>Snake Game</h1>
+                <div class="score">Score: <span id="score">0</span></div>
+            </div>
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+            <div class="game-controls">
+                <p>Use arrow keys or WASD to move the snake</p>
+                <button id="startButton">Start Game</button>
+            </div>
         </div>
-        <canvas id="gameCanvas" width="400" height="400"></canvas>
-        <div class="game-controls">
-            <p>Use arrow keys or WASD to move the snake</p>
-            <button id="startButton">Start Game</button>
+        <div class="game-options">
+            <h2>Game Options</h2>
+            <div class="options-container">
+                <div class="radio-option">
+                    <input type="radio" id="wallCollision" name="gameMode" value="walls" checked>
+                    <label for="wallCollision">Game with Walls</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="wallPass" name="gameMode" value="pass">
+                    <label for="wallPass">Pass Through Walls</label>
+                </div>
+            </div>
         </div>
     </div>
     <script src="game.js"></script>
