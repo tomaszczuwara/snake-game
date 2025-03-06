@@ -93,10 +93,21 @@ body {
 .options-container {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
+}
+
+.options-section {
+    margin-bottom: 1rem;
+}
+
+.options-section h3 {
+    color: #444;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
 }
 
 .radio-option {
+    margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -107,6 +118,11 @@ body {
 }
 
 .radio-option label {
-    color: #666;
+    color: #555;
     cursor: pointer;
+    user-select: none;
+}
+
+.radio-option:hover label {
+    color: #333;
 }

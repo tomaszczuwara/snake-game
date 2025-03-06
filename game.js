@@ -57,7 +57,13 @@ class Game {
         this.food = { x: 15, y: 15 };
         this.score = 0;
         this.gameLoop = null;
-        this.wallPass = false;
+        this.wallPass = true;
+        this.gameSpeed = {
+            slow: 150,
+            normal: 100,
+            fast: 60
+        };
+        this.currentSpeed = this.gameSpeed.normal;
         this.setupEventListeners();
     }
 
@@ -74,6 +80,28 @@ class Game {
             this.wallPass = !e.target.checked;
             this.canvas.classList.add('walls-mode');
         });
+
+        // Add event listeners for speed control
+        document.getElementById('speedSlow').addEventListener('change', () => {
+            this.currentSpeed = this.gameSpeed.slow;
+            if (this.gameLoop) this.updateGameSpeed();
+        });
+        document.getElementById('speedNormal').addEventListener('change', () => {
+            this.currentSpeed = this.gameSpeed.normal;
+            if (this.gameLoop) this.updateGameSpeed();
+        });
+        document.getElementById('speedFast').addEventListener('change', () => {
+            this.currentSpeed = this.gameSpeed.fast;
+            if (this.gameLoop) this.updateGameSpeed();
+        });
+    }
+
+    updateGameSpeed() {
+        clearInterval(this.gameLoop);
+        this.gameLoop = setInterval(() => {
+            this.update();
+            this.draw();
+        }, this.currentSpeed);
     }
 
     handleInput(e) {
@@ -151,11 +179,6 @@ class Game {
         );
     }
 
-    gameLoop() {
-        this.update();
-        this.draw();
-    }
-
     start() {
         if (this.gameLoop) {
             clearInterval(this.gameLoop);
@@ -167,7 +190,7 @@ class Game {
         this.gameLoop = setInterval(() => {
             this.update();
             this.draw();
-        }, 100);
+        }, this.currentSpeed);
     }
 
     gameOver() {
